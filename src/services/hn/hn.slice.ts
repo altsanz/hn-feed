@@ -29,4 +29,4 @@ export const hnApi = createApi({
   }),
 });
 
-export const { useSearchPostsQuery } = hnApi;
+export const { useSearchPostsQuery, useGetPostByIdQuery } = hnApi;
