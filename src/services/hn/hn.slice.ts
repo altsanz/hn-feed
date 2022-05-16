@@ -1,22 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-
-export interface HnItem {
-    title: string;
-    author: string;
-    objectID: number;
-    num_of_comments: number;
-}
-
-export interface HnList {
-    hits: HnItem[];
-    page: number;
-}
-
-export interface HnSearchPayload {
-    page: number;
-    query: string;
-}
-
+import { HnList, HnSearchPayload } from './hn.types';
 
 export const hnApi = createApi({
     reducerPath: 'hackerNewsApi',
