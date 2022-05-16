@@ -1,15 +1,30 @@
-import { Box, Button, Grid } from "@mui/material";
-import { useEffect, useState } from "react";
+import { Box, Button, Grid, TextField } from "@mui/material";
+import { ChangeEvent, useEffect, useState } from "react";
 import { useSearchPostsQuery } from "../../services/hn/hn.slice";
 import { HnItem } from "../../services/hn/hn.types";
 import HnPostCard from "./HnPostCard";
+import { useDebounce } from "usehooks-ts";
 
 export const HnPostList = () => {
   const [page, setPage] = useState(0);
-  const { data: fetchedPostList } = useSearchPostsQuery({ page, query: "" });
+
+  const [queryString, setQueryString] = useState("");
+  const debouncedQueryString = useDebounce<string>(queryString, 500);
+  const { data: fetchedPostList } = useSearchPostsQuery({
+    page,
+    query: debouncedQueryString,
+  });
+
   const [shownPostList, setShownPostList] = useState<HnItem[]>([]);
   const incrementPage = () => {
     setPage(page + 1);
+  };
+
+  const querySearchTerm = (evt: ChangeEvent<HTMLInputElement>) => {
+    if (page !== 0) {
+      setPage(0);
+    }
+    setQueryString(evt.target.value);
   };
 
   useEffect(() => {
@@ -25,6 +40,20 @@ export const HnPostList = () => {
   }, [fetchedPostList]);
   return (
     <Box sx={{ display: "flex", flexDirection: "column", margin: "0 25px" }}>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <TextField
+          id="outlined-basic"
+          label="Search"
+          variant="outlined"
+          onChange={querySearchTerm}
+        />
+      </Box>
       <Grid container spacing={2}>
         {shownPostList &&
           shownPostList.map((post) => (
