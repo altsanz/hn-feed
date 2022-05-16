@@ -1,17 +1,14 @@
-import React from 'react';
+import React from "react";
+import { Outlet } from "react-router-dom";
 
-import './App.css';
-import { HnPostList } from './features/hnPosts/HnPostList';
+import "./App.css";
 function App() {
-
   return (
     <div className="App">
-      <header className="App-header">
-       Hacker News feed
-      </header>
+      <header className="App-header">Hacker News feed</header>
 
       <div>
-        <HnPostList></HnPostList>
+        <Outlet />
       </div>
     </div>
   );
