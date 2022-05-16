@@ -1,4 +1,4 @@
-import { Box, Button, Grid, TextField } from "@mui/material";
+import { Box, Button, CircularProgress, Grid, TextField } from "@mui/material";
 import { ChangeEvent, useEffect, useState } from "react";
 import { useSearchPostsQuery } from "../../services/hn/hn.slice";
 import { HnItem } from "../../services/hn/hn.types";
@@ -10,7 +10,7 @@ export const HnPostList = () => {
 
   const [queryString, setQueryString] = useState("");
   const debouncedQueryString = useDebounce<string>(queryString, 500);
-  const { data: fetchedPostList } = useSearchPostsQuery({
+  const { data: fetchedPostList, isFetching } = useSearchPostsQuery({
     page,
     query: debouncedQueryString,
   });
@@ -77,9 +77,12 @@ export const HnPostList = () => {
           alignItems: "center",
         }}
       >
-        <Button variant="contained" onClick={incrementPage}>
-          Load more
-        </Button>
+        {!isFetching && (
+          <Button variant="contained" onClick={incrementPage}>
+            Load more
+          </Button>
+        )}
+        {isFetching && <CircularProgress />}
       </Box>
     </Box>
   );
