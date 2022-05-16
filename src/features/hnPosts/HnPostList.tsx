@@ -45,10 +45,10 @@ export const HnPostList = () => {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
+          margin: "10px auto",
         }}
       >
         <TextField
-          id="outlined-basic"
           label="Search"
           variant="outlined"
           onChange={querySearchTerm}
@@ -57,8 +57,15 @@ export const HnPostList = () => {
       <Grid container spacing={2}>
         {shownPostList &&
           shownPostList.map((post) => (
-            <Grid item xs={12} sm={6} md={4} alignItems="stretch">
-              <HnPostCard post={post} key={post.objectID}></HnPostCard>
+            <Grid
+              item
+              xs={12}
+              sm={6}
+              md={4}
+              alignItems="stretch"
+              key={post.objectID}
+            >
+              <HnPostCard post={post}></HnPostCard>
             </Grid>
           ))}
       </Grid>
