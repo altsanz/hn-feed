@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { HnList, HnSearchPayload } from "./hn.types";
+import { HnList, HnPostDetail, HnSearchPayload } from "./hn.types";
 
 export const hnApi = createApi({
   reducerPath: "hackerNewsApi",
@@ -22,6 +22,9 @@ export const hnApi = createApi({
         }
         return baseEndpoint;
       },
+    }),
+    getPostById: builder.query<HnPostDetail, number>({
+      query: (id) => `/items/${id}`,
     }),
   }),
 });

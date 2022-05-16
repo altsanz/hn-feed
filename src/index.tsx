@@ -7,6 +7,7 @@ import reportWebVitals from "./reportWebVitals";
 import "./index.css";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { HnPostsPage } from "./pages/HnPostsPage";
+import { HnPostDetailPage } from "./pages/HnPostDetailPage";
 
 const container = document.getElementById("root")!;
 const root = createRoot(container);
@@ -18,6 +19,7 @@ root.render(
         <Routes>
           <Route path="/" element={<App />}>
             <Route index element={<HnPostsPage />} />
+            <Route path="/post/:postId" element={<HnPostDetailPage />} />
           </Route>
           {/* <Route path="invoices" element={<Invoices />} /> */}
         </Routes>

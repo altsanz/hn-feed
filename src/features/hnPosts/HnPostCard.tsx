@@ -6,12 +6,14 @@ import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { HnItem } from "../../services/hn/hn.types";
+import { useNavigate } from "react-router-dom";
 
 export interface HnPostCardProps {
   post: HnItem;
 }
 
 export default function HnPostCard({ post }: HnPostCardProps) {
+  const navigate = useNavigate();
   return (
     <Card sx={{ minWidth: 275 }}>
       <CardContent>
@@ -27,7 +29,9 @@ export default function HnPostCard({ post }: HnPostCardProps) {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Learn More</Button>
+        <Button size="small" onClick={() => navigate(`/post/${post.objectID}`)}>
+          See detail
+        </Button>
       </CardActions>
     </Card>
   );
