@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 export interface HnItem {
     title: string;
     author: string;
-    objectId: number;
+    objectID: number;
     num_of_comments: number;
 }
 
